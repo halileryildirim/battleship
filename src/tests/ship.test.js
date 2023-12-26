@@ -19,3 +19,12 @@ test("Is ship sunk test", () => {
 
   expect(ship.isSunk()).toBeTruthy();
 });
+
+test("Is ship vertical?", () => {
+  const carrier = new Ship(6); // ships are vertical by default rotate function is updating vertical status
+  expect(carrier.vertical).toBeTruthy();
+  carrier.rotate();
+  expect(carrier.vertical).toBeFalsy();
+  carrier.rotate();
+  expect(carrier.vertical).toBeTruthy();
+});

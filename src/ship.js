@@ -1,12 +1,17 @@
 class Ship {
-  constructor(length, hits = 0, sunk = false) {
+  constructor(length, hits = 0, vertical = true, sunk = false) {
     this.length = length;
     this.hits = hits;
     this.sunk = sunk;
+    this.vertical = vertical;
   }
 
   hit() {
     this.hits += 1;
+  }
+
+  rotate() {
+    this.vertical === true ? (this.vertical = false) : (this.vertical = true);
   }
 
   isSunk() {

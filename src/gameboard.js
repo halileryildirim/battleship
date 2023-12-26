@@ -1,18 +1,15 @@
 import Ship from "./ship";
 
-class Gameboard {
-  constructor(size = 10) {
-    this.size = size;
-    this.#generateBoard(size);
-  }
-
-  #generateBoard(size = this.size) {
-    const rows = new Array(size);
-    for (let i = 0; i < rows.length; i += 1) {
-      rows[i] = new Array(size);
-    }
-    return rows;
-  }
+function gameboard() {
+  const board = Array.from(Array(10), () =>
+    Array(10)
+      .fill()
+      .map(() => ({
+        isHit: false,
+        ship: null,
+      }))
+  );
+  return { board };
 }
 
-export default Gameboard;
+export default gameboard;

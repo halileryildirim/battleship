@@ -1,20 +1,10 @@
 import Ship from "./ship";
 
 function gameboard() {
-  const board = Array.from(Array(10), () =>
-    Array(10)
-      .fill()
-      .map(() => ({
-        isHit: false,
-        ship: null,
-      }))
-  );
-  const ships = [];
-  function placeShip() {
-    const ship = new Ship(5);
-    ships.push(ship);
-  }
-  return { board, placeShip };
+  const board = Array(10);
+  for (let i = 0; i < board.length; i += 1) [(board[i] = new Array(10))];
+
+  return board;
 }
 
 export default gameboard;

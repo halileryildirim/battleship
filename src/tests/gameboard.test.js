@@ -1,9 +1,9 @@
 import gameboard from "../gameboard";
 
-const gBoard = gameboard();
+const board = gameboard();
 
-test("Gameboard size test", () => {
+test("Gameboard to be array", () => {
   for (let i = 0; i < 10; i += 1) {
-    expect(gBoard.board[10].length).toBe(11);
+    expect(board[i].length).toBe(10);
   }
 });

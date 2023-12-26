@@ -9,7 +9,12 @@ function gameboard() {
         ship: null,
       }))
   );
-  return { board };
+  const ships = [];
+  function placeShip() {
+    const ship = new Ship(5);
+    ships.push(ship);
+  }
+  return { board, placeShip };
 }
 
 export default gameboard;

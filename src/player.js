@@ -10,13 +10,13 @@ function player() {
   }
 
   function attack(x, y) {
-    player.board.receiveAttack(x, y);
+    return [x, y];
   }
 
   function compAttack() {
     const randomX = Math.floor(Math.random() * 10);
     const randomY = Math.floor(Math.random() * 10);
-    return { randomX, randomY };
+    return [randomX, randomY];
   }
 
   function placeShipsRandom() {

@@ -10,11 +10,6 @@ function gameboard() {
   const ships = [];
 
   function placeShip([row, col], ship) {
-    // update empty array elements as S when a ship placed
-    // if placing S is impossible dont allow to place (out of boundaries or the element already is an S)
-    // dont allow placement to nearby nodes  a 5,5 5,6 5,7 cant place to previous row, next row, next and previous column of the ship
-    // ship index can be taken and update the index for the length of size to place and test if placeable but vertical and horizontal state is important
-
     // vertical ship placement
     const shipSize = ship.length;
     if (ship.vertical) {
@@ -35,6 +30,7 @@ function gameboard() {
       return "Ship deployment failed.";
     }
 
+    // horizontal ship placement
     if (col + shipSize < 10 && board[row][col] !== "S") {
       for (let i = 0; i < shipSize; i += 1) {
         if (board[row][col + i] !== "S") board[row][col + i] = "S";
@@ -52,7 +48,23 @@ function gameboard() {
     return "Ship deployment failed.";
   }
 
-  return { board, ships, placeShip };
+  function receiveAttack(x, y) {
+    // receive the attack , check if its hit first then if there's a ship or water update.
+    if (board[x][y] !== "H") {
+      if (board[x][y] === "S") {
+        // initiate ship hit when actual ships are used for ship placement ship.hit()
+        // After every successful attack check if they're sunk
+        // If a ship sinks filter ships from sunk ships end the game when ships are empty
+        board[x][y] = "H";
+        return "You hit the enemy ship";
+      }
+      board[x][y] = "H";
+      return "You missed and shot is landed on water";
+    }
+    return "You already attacked here.";
+  }
+
+  return { board, ships, placeShip, receiveAttack };
 }
 
 export default gameboard;

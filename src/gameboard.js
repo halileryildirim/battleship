@@ -1,4 +1,4 @@
-import Ship from "./ship";
+// import Ship from "./ship";
 
 function gameboard() {
   const board = Array(10);

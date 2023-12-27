@@ -21,13 +21,13 @@ function gameboard() {
               delete board[row + i - 1][col];
               i -= 1;
             }
-            return "Ship deployment failed.";
+            return false;
           }
         }
         ships.push(ship);
-        return "Ship deployed successfuly.";
+        return true;
       }
-      return "Ship deployment failed.";
+      return false;
     }
 
     // horizontal ship placement
@@ -39,13 +39,13 @@ function gameboard() {
             delete board[row][col + i - 1];
             i -= 1;
           }
-          return "Ship deployment failed.";
+          return false;
         }
       }
       ships.push(ship);
-      return "Ship deployed successfuly.";
+      return true;
     }
-    return "Ship deployment failed.";
+    return false;
   }
 
   function receiveAttack(x, y) {
@@ -56,12 +56,12 @@ function gameboard() {
         // After every successful attack check if they're sunk
         // If a ship sinks filter ships from sunk ships end the game when ships are empty
         board[x][y] = "H";
-        return "You hit the enemy ship";
+        return true;
       }
       board[x][y] = "H";
-      return "You missed and shot is landed on water";
+      return false;
     }
-    return "You already attacked here.";
+    return false;
   }
 
   return { board, ships, placeShip, receiveAttack };

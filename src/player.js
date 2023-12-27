@@ -3,11 +3,10 @@ import Ship from "./ship";
 
 function player() {
   const board = gameboard();
-  let turn = false;
+  const turn = true;
 
-  function isTurn(enemy) {
-    turn = true;
-    enemy.turn.set(false);
+  function setTurn(value) {
+    this.turn = value;
   }
 
   function attack(x, y) {
@@ -75,18 +74,11 @@ function player() {
 
   return {
     board,
-    isTurn,
+    turn,
+    setTurn,
     attack,
     compAttack,
     placeShipsRandom,
-    turn: {
-      get() {
-        return turn;
-      },
-      set(value) {
-        turn = value;
-      },
-    },
   };
 }
 

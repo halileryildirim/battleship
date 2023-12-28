@@ -4,18 +4,28 @@ import Ship from "./ship";
 function player() {
   const board = gameboard();
   const turn = true;
+  const attacks = [];
 
   function setTurn(value) {
     this.turn = value;
   }
 
   function attack(x, y) {
-    return [x, y];
+    if (x < 10 && y < 10 && !attacks.includes(`(${x},${y})`)) {
+      attacks.push(`(${x},${y})`);
+      return [x, y];
+    }
+    return "Invalid Attack";
   }
 
   function compAttack() {
-    const randomX = Math.floor(Math.random() * 10);
-    const randomY = Math.floor(Math.random() * 10);
+    let randomX = Math.floor(Math.random() * 10);
+    let randomY = Math.floor(Math.random() * 10);
+    while (attacks.includes(`(${randomX},${randomY})`)) {
+      randomX = Math.floor(Math.random() * 10);
+      randomY = Math.floor(Math.random() * 10);
+    }
+    attacks.push(`(${randomX},${randomY})`);
     return [randomX, randomY];
   }
 
@@ -79,6 +89,7 @@ function player() {
     attack,
     compAttack,
     placeShipsRandom,
+    attacks,
   };
 }
 

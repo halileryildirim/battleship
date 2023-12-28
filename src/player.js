@@ -85,11 +85,11 @@ function player() {
   return {
     board,
     turn,
+    attacks,
     setTurn,
     attack,
     compAttack,
     placeShipsRandom,
-    attacks,
   };
 }
 

@@ -24,6 +24,7 @@ test("Player test", () => {
   playerZero.attack(5, 3);
   expect(playerZero.attacks.length).toBe(1);
   expect(playerZero.attack(5, 3)).toBe("Invalid Attack");
+  expect(playerZero.attacks.length).toBe(1);
   playerOne.compAttack();
   playerOne.compAttack();
   playerOne.compAttack();

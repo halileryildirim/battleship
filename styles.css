@@ -42,3 +42,7 @@ body {
 .hit {
     background-color: grey;
 }
+
+.ship-hit {
+    background-color: lightcoral;
+}

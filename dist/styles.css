@@ -18,16 +18,27 @@ body {
 
 #player-content, #computer-content {
     text-align: center;
+    
 }
 
 #player-board, #computer-board {
     display: flex;
-    margin: auto;
 }
 
 #player-board>div>div, #computer-board>div>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: solid black 1px;
     height: 48px;
     width: 48px;
 
+}
+
+.ship {
+    background-color: powderblue;
+}
+
+.hit {
+    background-color: grey;
 }

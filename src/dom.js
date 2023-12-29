@@ -1,7 +1,3 @@
-import Ship from "./ship";
-import gameboard from "./gameboard";
-import player from "./player";
-
 function domLoader() {
   function drawBoard() {
     // draw board for player
@@ -15,6 +11,7 @@ function domLoader() {
       }
       playerBoard.append(playerRow);
     }
+
     // draw board for computer
     const computerBoard = document.querySelector("#computer-board");
     for (let i = 0; i < 10; i += 1) {
@@ -28,7 +25,17 @@ function domLoader() {
     }
   }
 
-  return { drawBoard };
+  function updateBoard(x, y) {
+    const updateCell = document.querySelector(`(${x},${y})`);
+    if (updateCell.classList.contains("ship")) {
+      updateCell.classList.add("ship-hit");
+      updateCell.textContent = "X";
+    } else {
+      updateCell.classList.add("hit");
+      updateCell.textContent = "⚫";
+    }
+  }
+  return { drawBoard, updateBoard };
 }
 
 export default domLoader;

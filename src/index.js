@@ -1,5 +1,8 @@
 import domLoader from "./dom";
+import game from "./game";
 
-const dom = domLoader();
+const domFuncs = domLoader();
+const gameFuncs = game();
 
-dom.drawBoard();
+domFuncs.drawBoard();
+gameFuncs.startGame();

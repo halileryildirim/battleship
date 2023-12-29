@@ -3,7 +3,7 @@ import Ship from "./ship";
 
 function player() {
   const board = gameboard();
-  const turn = true;
+  const turn = false;
   const attacks = [];
 
   function setTurn(value) {

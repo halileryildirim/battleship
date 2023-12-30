@@ -36,6 +36,10 @@ body {
 }
 
 .ship {
+    background-color: blue;
+}
+
+.ship-zone {
     background-color: powderblue;
 }
 

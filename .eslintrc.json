@@ -13,6 +13,8 @@
     },
     "rules": {
         "no-undef": "off",
-        "no-unused-expressions": "warn"
+        "no-unused-expressions": "warn",
+        "no-restricted-syntax": "off",
+        "prefer-destructuring": "off"
     }
 }

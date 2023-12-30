@@ -30,11 +30,11 @@ function player() {
   }
 
   function placeShipsRandom() {
-    const carrier = new Ship(6);
-    const battleship = new Ship(4);
-    const destroyer = new Ship(3);
-    const submarine = new Ship(3);
-    const cruiser = new Ship(2);
+    const carrier = new Ship(6, "carrier");
+    const battleship = new Ship(4, "battleship");
+    const destroyer = new Ship(3, "destroyer");
+    const submarine = new Ship(3, "submarine");
+    const cruiser = new Ship(2, "cruiser");
 
     if (board.ships.length !== 5) {
       let randomX = Math.floor(Math.random() * 10);
@@ -47,6 +47,8 @@ function player() {
           randomY = Math.floor(Math.random() * 10);
         }
       }
+      randomX = Math.floor(Math.random() * 10);
+      randomY = Math.floor(Math.random() * 10);
 
       if (!board.placeShip([randomX, randomY], battleship)) {
         while (!board.placeShip([randomX, randomY], battleship)) {
@@ -56,6 +58,9 @@ function player() {
         }
       }
 
+      randomX = Math.floor(Math.random() * 10);
+      randomY = Math.floor(Math.random() * 10);
+
       if (!board.placeShip([randomX, randomY], destroyer)) {
         while (!board.placeShip([randomX, randomY], destroyer)) {
           destroyer.rotate();
@@ -64,6 +69,9 @@ function player() {
         }
       }
 
+      randomX = Math.floor(Math.random() * 10);
+      randomY = Math.floor(Math.random() * 10);
+
       if (!board.placeShip([randomX, randomY], submarine)) {
         while (!board.placeShip([randomX, randomY], submarine)) {
           submarine.rotate();
@@ -71,6 +79,9 @@ function player() {
           randomY = Math.floor(Math.random() * 10);
         }
       }
+
+      randomX = Math.floor(Math.random() * 10);
+      randomY = Math.floor(Math.random() * 10);
 
       if (!board.placeShip([randomX, randomY], cruiser)) {
         while (!board.placeShip([randomX, randomY], cruiser)) {

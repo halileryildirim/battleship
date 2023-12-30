@@ -1,41 +1,48 @@
 function domLoader() {
-  function drawBoard() {
+  function drawPlayerBoard(array) {
     // draw board for player
     const playerBoard = document.querySelector("#player-board");
     for (let i = 0; i < 10; i += 1) {
       const playerRow = document.createElement("div");
+      playerRow.id = "player-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(`(${i},${j})`);
+        cell.classList.add(i);
+        cell.classList.add(j);
+        if (array[i][j] === "S") {
+          cell.classList.add("ship");
+        } else if (array[i][j] === "s") {
+          cell.classList.add("ship-zone");
+        }
         playerRow.append(cell);
       }
       playerBoard.append(playerRow);
     }
-
+  }
+  function drawCompBoard(array) {
     // draw board for computer
     const computerBoard = document.querySelector("#computer-board");
     for (let i = 0; i < 10; i += 1) {
       const computerRow = document.createElement("div");
+      computerRow.id = "computer-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(`(${i},${j})`);
+        cell.classList.add(i);
+        cell.classList.add(j);
+        if (array[i][j] === "S") {
+          cell.classList.add("ship");
+        } else if (array[i][j] === "s") {
+          cell.classList.add("ship-zone");
+        }
         computerRow.append(cell);
       }
       computerBoard.append(computerRow);
     }
   }
 
-  function updateBoard(x, y) {
-    const updateCell = document.querySelector(`(${x},${y})`);
-    if (updateCell.classList.contains("ship")) {
-      updateCell.classList.add("ship-hit");
-      updateCell.textContent = "X";
-    } else {
-      updateCell.classList.add("hit");
-      updateCell.textContent = "⚫";
-    }
-  }
-  return { drawBoard, updateBoard };
+  function updateBoard(x, y, array, cell) {}
+  return { drawPlayerBoard, drawCompBoard, updateBoard };
 }
 
 export default domLoader;
+// ⚫

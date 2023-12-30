@@ -46,7 +46,8 @@ function game() {
           // computer attacks randomly after player attacks
           const attack = computer.compAttack();
           playerBoard.receiveAttack(attack[0], attack[1]);
-          // console.log(playerBoard.board);
+          console.log(attack[0], attack[1]);
+          console.log(playerBoard.board);
           playerZero.setTurn(true);
         });
       }

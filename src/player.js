@@ -12,8 +12,9 @@ function player() {
 
   function attack(x, y) {
     if (x < 10 && y < 10 && !attacks.includes(`(${x},${y})`)) {
-      attacks.push(`(${x},${y})`);
-      return [x, y];
+      const playerAttack = `(${x},${y})`;
+      attacks.push(playerAttack);
+      return playerAttack;
     }
     return "Invalid Attack";
   }
@@ -25,8 +26,9 @@ function player() {
       randomX = Math.floor(Math.random() * 10);
       randomY = Math.floor(Math.random() * 10);
     }
-    attacks.push(`(${randomX},${randomY})`);
-    return [randomX, randomY];
+    const randomAttack = `(${randomX},${randomY})`;
+    attacks.push(randomAttack);
+    return randomAttack;
   }
 
   function placeShipsRandom() {

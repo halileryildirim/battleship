@@ -7,11 +7,11 @@ function domLoader() {
       playerRow.id = "player-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(i);
         cell.classList.add(j);
-        if (array[i][j] === "S") {
+        cell.classList.add(i);
+        if (array[j][i] === "S") {
           cell.classList.add("ship");
-        } else if (array[i][j] === "s") {
+        } else if (array[j][i] === "s") {
           cell.classList.add("ship-zone");
         }
         playerRow.append(cell);
@@ -27,11 +27,11 @@ function domLoader() {
       computerRow.id = "computer-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(i);
         cell.classList.add(j);
-        if (array[i][j] === "S") {
+        cell.classList.add(i);
+        if (array[j][i] === "S") {
           cell.classList.add("ship");
-        } else if (array[i][j] === "s") {
+        } else if (array[j][i] === "s") {
           cell.classList.add("ship-zone");
         }
         computerRow.append(cell);

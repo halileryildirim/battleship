@@ -12,7 +12,7 @@ function gameboard() {
   function placeShip([row, col], ship) {
     // vertical ship placement
     const shipSize = ship.length;
-    if (ship.vertical) {
+    if (ship.vertical === true) {
       if (
         row + shipSize < 10 &&
         board[row][col] !== "S" &&
@@ -47,40 +47,41 @@ function gameboard() {
       }
       return false;
     }
+    // horizontal ship placements
+    if (ship.vertical === false) {
+      if (
+        col + shipSize < 10 &&
+        board[row][col] !== "S" &&
+        board[row][col] !== "s"
+      ) {
+        for (let i = 0; i < shipSize; i += 1) {
+          if (board[row][col + i] !== "S" && board[row][col] !== "s") {
+            board[row][col + i] = "S";
+            if (row + 1 < 10) board[row + 1][col + i] = "s";
+            if (row - 1 >= 0) board[row - 1][col + i] = "s";
+            if (col - 1 >= 0) board[row][col - 1] = "s";
+            if (col + shipSize < 10) board[row][col + shipSize] = "s";
+            if (row - 1 >= 0 && col - 1 >= 0) board[row - 1][col - 1] = "s";
+            if (row + 1 < 10 && col - 1 >= 0) board[row + 1][col - 1] = "s";
 
-    // horizontal ship placement
-    if (
-      col + shipSize < 10 &&
-      board[row][col] !== "S" &&
-      board[row][col] !== "s"
-    ) {
-      for (let i = 0; i < shipSize; i += 1) {
-        if (board[row][col + i] !== "S" && board[row][col] !== "s") {
-          board[row][col + i] = "S";
-          if (row + 1 < 10) board[row + 1][col + i] = "s";
-          if (row - 1 >= 0) board[row - 1][col + i] = "s";
-          if (col - 1 >= 0) board[row][col - 1] = "s";
-          if (col + shipSize < 10) board[row][col + shipSize] = "s";
-          if (row - 1 >= 0 && col - 1 >= 0) board[row - 1][col - 1] = "s";
-          if (row + 1 < 10 && col - 1 >= 0) board[row + 1][col - 1] = "s";
-
-          if (row - 1 >= 0 && col + shipSize < 10)
-            board[row - 1][col + shipSize] = "s";
-          if (row + 1 < 10 && col + shipSize < 10)
-            board[row + 1][col + shipSize] = "s";
-        } else {
-          i = 0;
-          while (i < shipSize) {
-            if (board[row][col + i] !== undefined) {
-              board[row][col + i] = " ";
-              i += 1;
+            if (row - 1 >= 0 && col + shipSize < 10)
+              board[row - 1][col + shipSize] = "s";
+            if (row + 1 < 10 && col + shipSize < 10)
+              board[row + 1][col + shipSize] = "s";
+          } else {
+            i = 0;
+            while (i < shipSize) {
+              if (board[row][col + i] !== undefined) {
+                board[row][col + i] = " ";
+                i += 1;
+              }
             }
+            return false;
           }
-          return false;
         }
+        ships.push(ship);
+        return true;
       }
-      ships.push(ship);
-      return true;
     }
     return false;
   }

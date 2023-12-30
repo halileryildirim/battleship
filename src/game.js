@@ -1,5 +1,6 @@
 import player from "./player";
 import domLoader from "./dom";
+import Ship from "./ship";
 
 const domManage = domLoader();
 
@@ -13,10 +14,14 @@ function game() {
   const compBoard = document.querySelectorAll("#computer-board");
 
   function startGame() {
-    playerZero.placeShipsRandom();
+    playerBoard.placeShip([0, 0], new Ship(6, "carrier", false));
+    playerBoard.placeShip([2, 6], new Ship(4, "battleship", true));
+    playerBoard.placeShip([4, 0], new Ship(3, "destroyer", false));
+    playerBoard.placeShip([6, 8], new Ship(3, "submarine", true));
+    playerBoard.placeShip([7, 2], new Ship(2, "cruiser", false));
     domManage.drawPlayerBoard(playerBoard.board);
 
-    computer.placeShipsRandom();
+    computer.placeShipsRandom(); // computer gets its ships randomized
     domManage.drawCompBoard(computerBoard.board);
 
     playerZero.setTurn(true);

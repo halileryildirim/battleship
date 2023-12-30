@@ -11,8 +11,6 @@ function domLoader() {
         cell.classList.add(i);
         if (array[j][i] === "S") {
           cell.classList.add("ship");
-        } else if (array[j][i] === "s") {
-          cell.classList.add("ship-zone");
         }
         playerRow.append(cell);
       }
@@ -31,8 +29,6 @@ function domLoader() {
         cell.classList.add(i);
         if (array[j][i] === "S") {
           cell.classList.add("ship");
-        } else if (array[j][i] === "s") {
-          cell.classList.add("ship-zone");
         }
         computerRow.append(cell);
       }

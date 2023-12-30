@@ -10,80 +10,41 @@ function gameboard() {
   const ships = [];
 
   function placeShip([row, col], ship) {
-    // vertical ship placement
     const shipSize = ship.length;
-    if (ship.vertical === true) {
-      if (
-        row + shipSize < 10 &&
-        board[row][col] !== "S" &&
-        board[row][col] !== "s"
-      ) {
-        for (let i = 0; i < shipSize; i += 1) {
-          if (board[row + i][col] !== "S" && board[row][col] !== "s") {
-            board[row + i][col] = "S";
-            if (col + 1 < 10) board[row + i][col + 1] = "s";
-            if (col - 1 >= 0) board[row + i][col - 1] = "s";
-            if (row - 1 >= 0) board[row - 1][col] = "s";
-            if (row + shipSize < 10) board[row + shipSize][col] = "s";
-            if (row - 1 >= 0 && col - 1 >= 0) board[row - 1][col - 1] = "s";
-            if (row - 1 >= 0 && col + 1 < 10) board[row - 1][col + 1] = "s";
-            if (row + shipSize < 10 && col - 1 >= 0)
-              board[row + shipSize][col - 1] = "s";
-            if (row + shipSize < 10 && col + 1 < 10)
-              board[row + shipSize][col + 1] = "s";
-          } else {
-            i = 0;
-            while (i < shipSize) {
-              if (board[row + i][col] !== undefined) {
-                board[row + i][col] = " ";
-                i += 1;
-              }
-            }
-            return false;
-          }
-        }
-        ships.push(ship);
-        return true;
+
+    if (ship.vertical) {
+      if (row + shipSize > 10) {
+        return false;
       }
+
+      for (let i = row; i < row + shipSize; i += 1) {
+        if (board[i][col] === "S") {
+          return false;
+        }
+      }
+
+      for (let i = row; i < row + shipSize; i += 1) {
+        board[i][col] = "S";
+      }
+      ships.push(ship);
+      return true;
+    }
+
+    if (col + shipSize > 10) {
       return false;
     }
-    // horizontal ship placements
-    if (ship.vertical === false) {
-      if (
-        col + shipSize < 10 &&
-        board[row][col] !== "S" &&
-        board[row][col] !== "s"
-      ) {
-        for (let i = 0; i < shipSize; i += 1) {
-          if (board[row][col + i] !== "S" && board[row][col] !== "s") {
-            board[row][col + i] = "S";
-            if (row + 1 < 10) board[row + 1][col + i] = "s";
-            if (row - 1 >= 0) board[row - 1][col + i] = "s";
-            if (col - 1 >= 0) board[row][col - 1] = "s";
-            if (col + shipSize < 10) board[row][col + shipSize] = "s";
-            if (row - 1 >= 0 && col - 1 >= 0) board[row - 1][col - 1] = "s";
-            if (row + 1 < 10 && col - 1 >= 0) board[row + 1][col - 1] = "s";
 
-            if (row - 1 >= 0 && col + shipSize < 10)
-              board[row - 1][col + shipSize] = "s";
-            if (row + 1 < 10 && col + shipSize < 10)
-              board[row + 1][col + shipSize] = "s";
-          } else {
-            i = 0;
-            while (i < shipSize) {
-              if (board[row][col + i] !== undefined) {
-                board[row][col + i] = " ";
-                i += 1;
-              }
-            }
-            return false;
-          }
-        }
-        ships.push(ship);
-        return true;
+    for (let i = col; i < col + shipSize; i += 1) {
+      if (board[row][i] === "S") {
+        return false;
       }
     }
-    return false;
+
+    for (let i = col; i < col + shipSize; i += 1) {
+      board[row][i] = "S";
+    }
+    ships.push(ship);
+    return true;
   }
 
   function receiveAttack(x, y) {

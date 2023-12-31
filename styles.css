@@ -35,18 +35,19 @@ body {
 
 }
 
-.ship {
-    background-color: blue;
-}
-
-.ship-zone {
+#cell {
     background-color: powderblue;
 }
 
-.hit {
+#cell.ship {
+    background-color: blue;
+}
+
+#cell.hit {
+    background-color: lightcoral;
+}
+
+#cell.interacted {
     background-color: grey;
 }
 
-.ship-hit {
-    background-color: lightcoral;
-}

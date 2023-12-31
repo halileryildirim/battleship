@@ -30,37 +30,29 @@ function game() {
   function gameplay() {
     if (playerZero.turn) {
       for (const cell of compBoard) {
-        cell.addEventListener("click", (e) => {
-          const x = e.target.classList[0];
-          let y = 0;
-          // logic for the cells like 0,0 1,1 since they cant have dupe ID's
-          if (e.target.classList[1] === undefined) {
-            y = x;
-          } else {
-            y = e.target.classList[1];
-          }
-          computerBoard.receiveAttack(x, y);
-          console.log(computerBoard.board);
-          playerZero.setTurn(false);
+        if (
+          !cell.classList.contains("hit") &&
+          !cell.classList.contains("interacted")
+        ) {
+          cell.addEventListener("click", (e) => {
+            console.log(computerBoard.board);
+            const x = e.target.dataset.x;
+            const y = e.target.dataset.y;
 
-          // computer attacks randomly after player attacks
-          const attack = computer.compAttack();
-          console.log(attack);
-          playerBoard.receiveAttack(attack[0], attack[1]);
-          console.log(playerBoard.board);
-          playerZero.setTurn(true);
-        });
+            computerBoard.receiveAttack(x, y);
+            domManage.updateBoard(e.target);
+            playerZero.setTurn(false);
+
+            // computer attacks randomly after player attacks
+            const attack = computer.compAttack();
+            playerBoard.receiveAttack(attack[0], attack[1]);
+            domManage.updatePlayerBoard(attack[0], attack[1]);
+            playerZero.setTurn(true);
+          });
+        }
       }
-      // every cell click updates the cell with updateBoard from DOM.js and computer gameBoard receiveAttack
-      // if a valid click is confirmed playerZero.turn = false, computer.turn = true
     }
   }
-
-  /*
-    ????????????????????????????????????????????????????????????????????????????????????????????????
-    THE ACTUAL FUCKING PROBLEM IS HOW AM I GONNA LINK THE SHIP PLACES IN GAMEBOARD WITH DOM
-    ????????????????????????????????????????????????????????????????????????????????????????????????
-  */
   return { startGame, gameplay, playerZero, computer };
 }
 

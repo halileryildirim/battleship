@@ -48,19 +48,7 @@ function gameboard() {
   }
 
   function receiveAttack(x, y) {
-    // receive the attack , check if its hit first then if there's a ship or water update.
-    if (board[x][y] !== "H") {
-      if (board[x][y] === "S") {
-        // initiate ship hit when actual ships are used for ship placement ship.hit()
-        // After every successful attack check if they're sunk
-        // If a ship sinks filter ships from sunk ships end the game when ships are empty
-        board[x][y] = "H";
-        return true;
-      }
-      board[x][y] = "H";
-      return false;
-    }
-    return false;
+    board[x][y] = "H";
   }
 
   return { board, ships, placeShip, receiveAttack };

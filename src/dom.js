@@ -7,8 +7,9 @@ function domLoader() {
       playerRow.id = "player-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(j);
-        cell.classList.add(i);
+        cell.id = "cell";
+        cell.dataset.x = i;
+        cell.dataset.y = j;
         if (array[j][i] === "S") {
           cell.classList.add("ship");
         }
@@ -25,10 +26,11 @@ function domLoader() {
       computerRow.id = "computer-row";
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add(j);
-        cell.classList.add(i);
+        cell.id = "cell";
+        cell.dataset.x = j;
+        cell.dataset.y = i;
         if (array[j][i] === "S") {
-          cell.classList.add("ship");
+          cell.classList.add("computer-ship");
         }
         computerRow.append(cell);
       }
@@ -36,9 +38,40 @@ function domLoader() {
     }
   }
 
-  function updateBoard(x, y, array, cell) {}
-  return { drawPlayerBoard, drawCompBoard, updateBoard };
+  function updateBoard(cell) {
+    if (
+      cell.classList.contains("ship") ||
+      cell.classList.contains("computer-ship")
+    ) {
+      if (!cell.classList.contains("hit")) {
+        cell.classList.add("hit");
+      }
+    } else {
+      // Mark as interacted for a miss (assuming no ship in this cell)
+      cell.classList.add("interacted");
+    }
+  }
+
+  function updatePlayerBoard(x, y) {
+    const xValue = x;
+    const yValue = y;
+    const cell = document.querySelector(
+      `[data-x="${xValue}"][data-y="${yValue}"]`
+    );
+    const board = cell.parentNode;
+    if (board.id === "player-row") {
+      if (cell.classList.contains("ship")) {
+        if (!cell.classList.contains("hit")) {
+          cell.classList.add("hit");
+        }
+      } else {
+        // Mark as interacted for a miss (assuming no ship in this cell)
+        cell.classList.add("interacted");
+      }
+    }
+  }
+
+  return { drawPlayerBoard, drawCompBoard, updateBoard, updatePlayerBoard };
 }
 
 export default domLoader;
-// ⚫

@@ -2,6 +2,7 @@ function domLoader() {
   function drawPlayerBoard(array) {
     // draw board for player
     const playerBoard = document.querySelector("#player-board");
+    playerBoard.innerHTML = "";
     for (let i = 0; i < 10; i += 1) {
       const playerRow = document.createElement("div");
       playerRow.id = "player-row";
@@ -21,6 +22,7 @@ function domLoader() {
   function drawCompBoard(array) {
     // draw board for computer
     const computerBoard = document.querySelector("#computer-board");
+    computerBoard.innerHTML = "";
     for (let i = 0; i < 10; i += 1) {
       const computerRow = document.createElement("div");
       computerRow.id = "computer-row";
@@ -30,7 +32,7 @@ function domLoader() {
         cell.dataset.x = j;
         cell.dataset.y = i;
         if (array[j][i] === "S") {
-          cell.classList.add("computer-ship");
+          cell.dataset.value = "ship";
         }
         computerRow.append(cell);
       }
@@ -39,15 +41,11 @@ function domLoader() {
   }
 
   function updateBoard(cell) {
-    if (
-      cell.classList.contains("ship") ||
-      cell.classList.contains("computer-ship")
-    ) {
+    if (cell.dataset.value === "ship") {
       if (!cell.classList.contains("hit")) {
         cell.classList.add("hit");
       }
     } else {
-      // Mark as interacted for a miss (assuming no ship in this cell)
       cell.classList.add("interacted");
     }
   }

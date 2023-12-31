@@ -3,20 +3,20 @@ import Ship from "./ship";
 
 function player() {
   const board = gameboard();
-  const turn = false;
+  const turn = true;
   const attacks = [];
 
-  function setTurn(value) {
-    this.turn = value;
+  function setTurn() {
+    this.turn = !this.turn;
   }
 
   function attack(x, y) {
     if (x < 10 && y < 10 && !attacks.includes(`(${x},${y})`)) {
       const playerAttack = `(${x},${y})`;
       attacks.push(playerAttack);
-      return playerAttack;
+      return true;
     }
-    return "Invalid Attack";
+    return false;
   }
 
   function compAttack() {

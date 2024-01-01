@@ -37,6 +37,7 @@ body {
 
 #cell {
     background-color: powderblue;
+    font-weight: bold;
 }
 
 #cell.ship {

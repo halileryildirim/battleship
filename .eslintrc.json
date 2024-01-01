@@ -13,8 +13,10 @@
     },
     "rules": {
         "no-undef": "off",
-        "no-unused-expressions": "warn",
+        "no-unused-expressions": "off",
         "no-restricted-syntax": "off",
-        "prefer-destructuring": "off"
+        "prefer-destructuring": "off",
+        "no-loop-func": "off",
+        "no-param-reassign": "off"
     }
 }

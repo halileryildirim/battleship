@@ -4,26 +4,31 @@ import domLoader from "./dom";
 const domManage = domLoader();
 
 function game() {
-  const playerZero = player();
-  const playerBoard = playerZero.board;
-  const playerZeroBoard = document.querySelectorAll("#player-board");
+  let playerZero = player();
+  let playerBoard = playerZero.board;
+  const shuffle = document.querySelector("#randomize");
 
   const computer = player();
   const computerBoard = computer.board;
   const compBoard = document.querySelectorAll("#computer-board");
 
+  function shuffleShips() {
+    shuffle.addEventListener("click", () => {
+      playerZero = player();
+      playerZero.placeShipsRandom();
+      playerBoard = playerZero.board;
+      domManage.drawPlayerBoard(playerBoard.board);
+    });
+  }
+
   function startGame() {
-    // playerBoard.placeShip([0, 0], new Ship(6, "carrier", false));
-    // playerBoard.placeShip([2, 6], new Ship(4, "battleship", true));
-    // playerBoard.placeShip([4, 0], new Ship(3, "destroyer", false));
-    // playerBoard.placeShip([6, 8], new Ship(3, "submarine", true));
-    // playerBoard.placeShip([7, 2], new Ship(2, "cruiser", false));
     playerZero.placeShipsRandom();
     domManage.drawPlayerBoard(playerBoard.board);
 
-    computer.placeShipsRandom(); // computer gets its ships randomized
+    computer.placeShipsRandom();
     domManage.drawCompBoard(computerBoard.board);
     computer.setTurn();
+    shuffleShips();
   }
 
   function gameOver() {
@@ -55,12 +60,13 @@ function game() {
     compWonFunc();
 
     if (playerWon) {
-      alert("YOU WON");
+      alert("YOU WIN!");
     }
     if (compWon) {
-      alert("YOU LOSE");
+      alert("YOU LOSE!");
     }
   }
+
   function gameplay() {
     console.log(computerBoard.board);
     if (playerZero.turn) {
@@ -76,11 +82,9 @@ function game() {
             computer.setTurn();
           }
           if (computer.turn) {
-            // computer attacks randomly after player attacks
             const attack = computer.compAttack();
             playerBoard.receiveAttack(attack[0], attack[1]);
             domManage.updatePlayerBoard(attack[0], attack[1]);
-            gameOver();
             playerZero.setTurn();
             computer.setTurn();
           }

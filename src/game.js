@@ -60,36 +60,46 @@ function game() {
     compWonFunc();
 
     if (playerWon) {
-      alert("YOU WIN!");
+      document.querySelector("#winner").textContent = "YOU WIN!";
     }
     if (compWon) {
-      alert("YOU LOSE!");
+      document.querySelector("#winner").textContent = "YOU LOSE";
     }
+    playerWon = playerWonFunc();
+    return { playerWon };
+  }
+
+  function handleTurns() {
+    return function listener(e) {
+      const x = e.target.dataset.x;
+      const y = e.target.dataset.y;
+      if (playerZero.attack(x, y)) {
+        console.log(gameOver());
+        console.log(computerBoard.board);
+        computerBoard.receiveAttack(x, y);
+        gameOver();
+        domManage.updateBoard(e.target);
+        playerZero.setTurn();
+        computer.setTurn();
+      }
+      if (computer.turn) {
+        const attack = computer.compAttack();
+        playerBoard.receiveAttack(attack[0], attack[1]);
+        domManage.updatePlayerBoard(attack[0], attack[1]);
+        playerZero.setTurn();
+        computer.setTurn();
+      }
+      if (gameOver().playerWon) {
+        document
+          .querySelector("#computer-board")
+          .removeEventListener("click", listener);
+      }
+    };
   }
 
   function gameplay() {
-    console.log(computerBoard.board);
-    if (playerZero.turn) {
-      for (const cell of compBoard) {
-        cell.addEventListener("click", (e) => {
-          const x = e.target.dataset.x;
-          const y = e.target.dataset.y;
-          if (playerZero.attack(x, y)) {
-            computerBoard.receiveAttack(x, y);
-            gameOver();
-            domManage.updateBoard(e.target);
-            playerZero.setTurn();
-            computer.setTurn();
-          }
-          if (computer.turn) {
-            const attack = computer.compAttack();
-            playerBoard.receiveAttack(attack[0], attack[1]);
-            domManage.updatePlayerBoard(attack[0], attack[1]);
-            playerZero.setTurn();
-            computer.setTurn();
-          }
-        });
-      }
+    for (const cell of compBoard) {
+      cell.addEventListener("click", handleTurns());
     }
   }
   return { startGame, gameplay };

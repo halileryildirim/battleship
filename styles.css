@@ -3,10 +3,21 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
+    background-color: rgb(135, 206, 235);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: black;
 }
 
 #header {
-    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+    background-color: transparent;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #content {
@@ -17,7 +28,10 @@ body {
 }
 
 #player-content, #computer-content {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
 }
 
@@ -25,23 +39,28 @@ body {
     display: flex;
 }
 
+
 #player-board>div>div, #computer-board>div>div{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid black 1px;
+    border: solid black 2px;
     height: 48px;
     width: 48px;
 
 }
 
+#computer-board > div > div {
+    background-color: rgb(145, 195, 220);
+    font-weight: bold;
+}
 #cell {
-    background-color: powderblue;
+    background-color: #91C3DC;
     font-weight: bold;
 }
 
 #cell.ship {
-    background-color: blue;
+    background-color: rgb(21, 56, 73);
 }
 
 #cell.hit {
@@ -49,9 +68,37 @@ body {
 }
 
 #cell.interacted {
-    background-color: grey;
+    background-color: rgb(85, 85, 85);
 }
 
 #winner {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#buttons {
+   display: flex;
+   gap: 16px;
+   flex-direction: column;
+   max-width: 10%;
+   padding-left: 19.5%;
+}
+
+#buttons > button {
+    font-size: 16px;
+    padding: 8px;
+    background-color: transparent;
+    color: black;
+    border: solid black 4px;
+    border-radius: 4px;
+}
+
+#ending-screen > div {
+    font-size: 34px;
+    font-weight: bold;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

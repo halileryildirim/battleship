@@ -69,12 +69,24 @@ function domLoader() {
       }
     }
   }
+  function endingScreen(winner) {
+    const ending = document.querySelector("#ending-screen");
+    ending.textContent = "";
+    const endingmsg = document.createElement("div");
+    const playAgainMsg = document.createElement("div");
 
+    endingmsg.innerText = `${winner} WON!`;
+    playAgainMsg.innerText = "Restart to Play Again";
+
+    ending.appendChild(endingmsg);
+    ending.appendChild(playAgainMsg);
+  }
   return {
     drawPlayerBoard,
     drawCompBoard,
     updateBoard,
     updatePlayerBoard,
+    endingScreen,
   };
 }
 
